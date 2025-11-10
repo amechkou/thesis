@@ -1,13 +1,45 @@
 \chapter{Related Work}
 \label{chap:1}
 
-Text of the second chapter
-
 \section{LLM Enhancement Techniques}
 \label{sec:1}
-2.1.1 prompt engineering
-2.1.2 Retrieval-augmented-generation
-2.1.3 Finetuning
+
+LLMs have demonstrated remarkable capabilities across various natural language processing tasks, yet they face significant limitations that hinder their deployment in critical domains such as mental healthcare. This section examines three primary enhancement techniques that address these limitations: prompt engineering, retrieval-augmented generation, and fine-tuning. Figure \ref{fig:rag-overview} illustrates the architectural framework of these enhancement approaches.
+
+% INSERT FIGURE 1 FROM GAO ET AL. SURVEY HERE - RAG technology tree
+% \begin{figure}[h]
+% \centering
+% \includegraphics[width=0.9\textwidth]{figures/rag_technology_tree.png}
+% \caption{Overview of RAG technology development and key components. Source: Gao et al. \cite{gao2024retrieval}}
+% \label{fig:rag-overview}
+% \end{figure}
+
+\subsection{Prompt Engineering}
+\label{subsec:prompt-engineering}
+
+% To be completed later
+
+\subsection{Retrieval-Augmented Generation}
+\label{subsec:rag}
+
+LLMs demonstrate impressive language understanding and generation capabilities, yet they face three critical challenges that limit their effectiveness in knowledge-intensive domains. First, they suffer from hallucination problems, producing responses that are fluent and coherent but factually incorrect \cite{gao2024retrieval, wu2024retrieval}. Second, the knowledge stored in LLM parameters becomes outdated over time, and updating this knowledge requires costly retraining or fine-tuning processes \cite{wu2024retrieval}. Third, general-purpose LLMs lack domain-specific expertise, and developing specialized models demands substantial resources for data collection and training \cite{gao2024retrieval}.
+
+Retrieval-Augmented Generation addresses these limitations by integrating external knowledge databases with LLMs. Rather than relying solely on parametric knowledge encoded during pre-training, RAG systems retrieve relevant information from external sources and provide this context to the LLM during inference \cite{gao2024retrieval}. This approach effectively reduces hallucinations by grounding responses in verifiable external information, enables continuous knowledge updates through database maintenance rather than model retraining, and facilitates domain specialization through the construction of targeted knowledge bases \cite{wu2024retrieval}.
+
+The fundamental architecture of RAG consists of three core components. The retrieval module encodes both the user query and documents from the knowledge base into dense vector representations, then computes semantic similarity to identify the most relevant documents \cite{gao2024retrieval}. The generation module, typically a pre-trained LLM such as GPT or LLaMA, processes both the original query and the retrieved context to produce informed responses \cite{wu2024retrieval}. The augmentation component integrates these elements, determining how retrieved information is presented to the generator and how the final output is constructed \cite{gao2024retrieval}.
+
+The evolution of RAG can be categorized into three developmental paradigms, each representing progressive enhancements over its predecessors \cite{gao2024retrieval}. Naive RAG follows a straightforward pipeline of indexing, retrieval, and generation, where documents are chunked and embedded, relevant chunks are retrieved based on query similarity, and the LLM generates responses using the retrieved context. While simple to implement, this approach suffers from potential retrieval of irrelevant or redundant information and lacks mechanisms to handle complex queries that require multi-step reasoning.
+
+Advanced RAG addresses these limitations through pre-retrieval and post-retrieval optimizations \cite{gao2024retrieval}. Pre-retrieval techniques improve query quality through expansion methods that enrich sparse queries with additional context, or through decomposition strategies that break complex queries into manageable sub-queries. Post-retrieval enhancements include reranking retrieved documents to prioritize the most relevant information, and context compression techniques that reduce noise while preserving essential content \cite{wu2024retrieval}.
+
+Modular RAG represents the current state of the art, offering flexible architectures that adapt to specific application requirements \cite{gao2024retrieval}. These systems can incorporate iterative retrieval for multi-hop reasoning tasks, integrate with fine-tuning strategies to align retriever and generator preferences, and employ adaptive mechanisms that determine when retrieval is necessary based on query characteristics.
+
+For mental healthcare applications, RAG offers particular advantages. The technology enables chatbots to access continuously updated medical guidelines and treatment protocols without requiring model retraining. It facilitates grounding responses in evidence-based resources, thereby increasing trustworthiness and reducing the risk of harmful advice. Furthermore, RAG systems can maintain transparency by citing retrieved sources, allowing operators to verify the information basis of AI-generated suggestions \cite{wu2024retrieval}. These capabilities position RAG as a critical enabler for responsible AI deployment in sensitive domains where accuracy, recency, and verifiability of information are paramount.
+
+\subsection{Fine-tuning}
+\label{subsec:finetuning}
+
+% To be completed later
 
 \section{State of LLMs for the}
 \label{sec:2}
@@ -15,8 +47,9 @@ Text of the second chapter
 
 
 
-Part b:
 
+\section{Implementations}
+Part b:
 Evaluating therapeutic chatbots requires a clear functional framework. Viewing them merely as underdeveloped "digital therapists" overlooks their specific mechanisms of action. A more productive approach, proposed by Grodniewicz and Hohol (2024), conceptualizes these tools as cognitive-affective artifacts. This perspective reframes chatbots as external aids designed to assist users through specific functions, rather than mimicking human therapy.
 
 According to this model, chatbots operate primarily by:
@@ -35,15 +68,7 @@ Understanding chatbots through this functional lens is particularly crucial in p
 While the "artifact" model provides a conceptual framework for how a chatbot should support affect, the work of Li et al. provides a technical mechanism for how it can be achieved. In "Knowledge Bridging for Empathetic Dialogue Generation," the authors address a core failure of standard models: their inability to perceive implicit emotions. They argue that human empathy relies heavily on external knowledge (e.g., commonsense, emotional lexicons) to understand a situation, noting that there is almost no word overlap between a speaker's problem and an empathetic listener's response. Their solution, KEMP (Knowledge-aware EMPathetic dialogue generation), "bridges" this gap by constructing an "emotional context graph" that enriches the dialogue with external knowledge from sources like ConceptNet. This "knowledge-bridging" is directly relevant to the AI-CARES project; for an AI to serve as a supportive tool for an operator, it must be able to "explicitly understand and express emotions." This paper provides a clear precedent for using RAG-like techniques not just for retrieving factual data (a cognitive task), but for retrieving affective and commonsense knowledge to build a more accurate emotional model of the user, thereby enhancing the AI's role as a supportive "affective artifact."
 (source:Knowledge Bridging for Empathetic Dialogue Generation)
 
+
+
 Building on these concepts, Ma et al. (2025) address the challenge of controlling the empathetic output. They note that standard training fails to "align the empathy levels" between a generated response and an ideal human response. Their work adopts the definition of empathy from Sharma et al. (2020), which quantifies it across three communication mechanisms: emotional reaction (affective empathy), interpretation, and exploration (cognitive empathy). The authors propose EmpRL, a framework that uses reinforcement learning (RL) to train a model. The key innovation is an "empathy reward function" that explicitly rewards the model for aligning its output with the target empathy levels for all three mechanisms. This approach is central to the goals of this thesis, as it provides a concrete, computational method for both generating and evaluating empathetic responses. The three-part framework (reaction, interpretation, exploration) serves as a pre-designed, trainable rubric, directly informing the "qualitative benchmark (role-playing)" task described in the work plan.
 (source: Empathy Level Alignment via Reinforcement Learning for Empathetic Response Generation)
-
-A significant challenge in applying LLMs to mental healthcare is the inherent need to manage long-form dialogues, as extended conversational context can often degrade model accuracy and increase inference times. The work of Guo et al. (2025) on the "SouLLMate" system directly addresses this problem by proposing specific techniques to enhance long-context reasoning. Their system, which integrates RAG and advanced prompt engineering , introduces methods like Key Indicator Summarization (KIS) to distill key information from historical dialogues and Stacked Multi-Model Reasoning (SMMR) to improve the reliability of reasoning over extended inputs. This approach is highly relevant as it provides a clear precedent for the "state-of-the-art techniques" this thesis aims to benchmark. Furthermore, the SouLLMate project outlines a novel evaluation methodology using professionally annotated data , aligning directly with this thesis's goal of developing a systematic framework for validating LLM performance in mental health support scenarios.
-(source: SouLLMate: An Application Enhancing Diverse Mental Health Support
-with Adaptive LLMs, Prompt Engineering, and RAG Techniques)
-
-While Retrieval-Augmented Generation (RAG) is a common method for providing LLMs with domain-specific knowledge, fine-tuning offers the potential to internalize this knowledge directly into the model's parameters, potentially reducing reliance on long prompts and external databases. However, standard supervised fine-tuning (SFT) often struggles to match RAG's effectiveness. Kujanpää et al. (2025) propose Prompt Distillation (PD), a self-distillation technique, as a more efficient method for knowledge injection from unstructured documents. In PD, the model being trained learns from its own output distributions generated when provided with the new knowledge in its prompt (acting as the 'teacher'), aiming to replicate this behavior without needing the knowledge in the prompt later (acting as the 'student'). This self-distillation approach avoids style and capacity mismatches inherent when learning from a different, often larger, expert model and leverages the richer information in probability distributions over target tokens (logits) rather than just the single 'correct' token used in SFT. The authors demonstrate that PD significantly outperforms SFT, requires less training data, and can achieve performance comparable or even superior to RAG in closed-book settings. Furthermore, combining PD with RAG can enhance performance beyond standard RAG alone. This makes Prompt Distillation a highly relevant technique to consider and potentially include in the comparative analysis planned for this thesis, as it presents a potentially more effective fine-tuning strategy for embedding specialized mental health knowledge into LLMs.
-(source: Efficient Knowledge Injection in LLMs via Self-Distillation)
-
-
-Text.
