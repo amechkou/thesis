@@ -17,7 +17,15 @@ LLMs have demonstrated remarkable capabilities across various natural language p
 \subsection{Prompt Engineering}
 \label{subsec:prompt-engineering}
 
-% To be completed later
+Prompt engineering represents the systematic practice of designing and refining input prompts to optimize LLM outputs \cite{schulhoff2024prompt, chen2024unleashing}. As the primary interface through which users interact with LLMs, carefully crafted prompts can significantly enhance model performance on complex tasks without requiring model retraining or fine-tuning \cite{schulhoff2024prompt}. This capability is particularly valuable in sensitive domains such as mental healthcare, where prompt engineering enables practitioners to adapt general-purpose models to specific use cases while maintaining safety and accuracy standards.
+
+The foundation of prompt engineering comprises two fundamental approaches: zero-shot and few-shot prompting \cite{schulhoff2024prompt}. Zero-shot prompting provides the model with task instructions without examples, relying entirely on the model's pre-trained knowledge to generalize to new tasks. Few-shot prompting enhances this by including a small number of input-output examples within the prompt, demonstrating the desired behavior and significantly improving the model's ability to understand task-specific patterns \cite{chen2024unleashing}. Research demonstrates that few-shot prompting substantially outperforms zero-shot approaches in knowledge-intensive tasks, though the effectiveness depends critically on example selection and ordering \cite{schulhoff2024prompt}.
+
+Chain-of-Thought prompting represents a significant advancement in eliciting reasoning capabilities from LLMs \cite{chen2024unleashing, schulhoff2024prompt}. This technique prompts the model to articulate intermediate reasoning steps before producing a final answer, either through explicit demonstrations in few-shot examples or through simple zero-shot instructions such as "Let's think step by step" \cite{chen2024unleashing}. Studies show that Chain-of-Thought prompting significantly improves accuracy on tasks requiring multi-step reasoning, particularly in domains such as mathematical problem-solving and logical inference \cite{schulhoff2024prompt}. The technique's effectiveness stems from its ability to break down complex problems into manageable sub-components, paralleling human problem-solving strategies.
+
+Building upon Chain-of-Thought, decomposition techniques further enhance reasoning by explicitly structuring problem breakdown \cite{schulhoff2024prompt}. Least-to-most prompting decomposes complex problems into simpler sub-problems that are solved sequentially, with each solution informing the next step \cite{chen2024unleashing}. This approach has demonstrated substantial improvements in tasks involving compositional generalization and symbolic manipulation \cite{schulhoff2024prompt}. Such decomposition strategies prove particularly relevant for mental healthcare applications, where complex user situations often require systematic analysis across multiple dimensions.
+
+For chatbot applications in sensitive domains, prompt engineering techniques offer mechanisms to control output style, tone, and safety characteristics \cite{schulhoff2024prompt}. Role prompting assigns specific personas to the model, such as "supportive counselor" or "information provider," enabling more contextually appropriate responses \cite{chen2024unleashing}. Self-consistency methods generate multiple reasoning paths and aggregate responses to improve reliability, reducing the risk of generating misleading or harmful content \cite{chen2024unleashing}. These techniques address critical concerns in mental healthcare settings, where response quality and consistency directly impact user wellbeing.
 
 \subsection{Retrieval-Augmented Generation}
 \label{subsec:rag}
@@ -47,9 +55,8 @@ For mental healthcare applications, RAG offers particular advantages. The techno
 
 
 
-
-\section{Implementations}
 Part b:
+
 Evaluating therapeutic chatbots requires a clear functional framework. Viewing them merely as underdeveloped "digital therapists" overlooks their specific mechanisms of action. A more productive approach, proposed by Grodniewicz and Hohol (2024), conceptualizes these tools as cognitive-affective artifacts. This perspective reframes chatbots as external aids designed to assist users through specific functions, rather than mimicking human therapy.
 
 According to this model, chatbots operate primarily by:
