@@ -47,7 +47,21 @@ For mental healthcare applications, RAG offers particular advantages. The techno
 \subsection{Fine-tuning}
 \label{subsec:finetuning}
 
-% To be completed later
+Fine-tuning adapts pre-trained LLMs to specific domains by continuing training on task-specific datasets \cite{kermani2025systematic}. Unlike prompt engineering and RAG, which leverage the model's existing capabilities without parameter modification, fine-tuning updates the model's weights to specialize its behavior for particular applications. This approach has demonstrated substantial performance gains in domain-specific tasks, particularly in sensitive areas such as mental health text analysis where nuanced understanding is critical.
+
+% INSERT FIGURE 2 FROM KERMANI ET AL. HERE - Fine-tuning architecture with LoRA
+% \begin{figure}[h]
+% \centering
+% \includegraphics[width=0.7\textwidth]{figures/finetuning_architecture.png}
+% \caption{Architecture of fine-tuning implementation showing LoRA adapter integration. The pre-trained LLaMA 3 parameters remain frozen while small adaptation matrices are trained for parameter-efficient fine-tuning. Source: Kermani et al. \cite{kermani2025systematic}}
+% \label{fig:finetuning-architecture}
+% \end{figure}
+
+The computational demands of traditional fine-tuning present significant challenges, requiring substantial GPU resources and training time. Parameter-efficient fine-tuning methods address these limitations by updating only a small subset of model parameters. Low-Rank Adaptation (LoRA) exemplifies this approach, introducing trainable low-rank matrices into the model architecture while keeping the original parameters frozen \cite{kermani2025systematic}. This technique dramatically reduces the number of trainable parameters and memory requirements while maintaining performance comparable to full fine-tuning.
+
+In mental health applications, fine-tuning has achieved state-of-the-art results. Evaluation on emotion classification and mental health condition detection tasks demonstrates that fine-tuned models reach accuracy rates of 91\% and 80\% respectively, substantially outperforming both prompt engineering and RAG approaches \cite{kermani2025systematic}. These performance gains prove particularly valuable for basic emotion recognition tasks such as joy and sadness detection, where fine-tuned models achieve F1-scores exceeding 0.94. However, the approach requires substantial training data and computational resources, creating barriers for organizations with limited infrastructure.
+
+The selection between fine-tuning, prompt engineering, and RAG depends on specific application requirements and available resources \cite{kermani2025systematic}. Fine-tuning delivers superior accuracy but demands extensive training data, computational capacity, and ongoing maintenance for model updates. RAG offers continuous knowledge updates through database modifications without requiring model retraining, making it suitable for scenarios where information changes frequently. Prompt engineering provides the most flexible deployment option, enabling rapid adaptation without computational overhead, though with moderate performance trade-offs. For mental health chatline support applications, a hybrid approach may prove optimal, combining fine-tuning for core capabilities with RAG for accessing current protocols and prompt engineering for flexible response generation.
 
 \section{State of LLMs for the}
 \label{sec:2}
