@@ -4,16 +4,14 @@
 \section{LLM Enhancement Techniques}
 \label{sec:1}
 
-LLMs have demonstrated remarkable capabilities across various natural language processing tasks, yet they face significant limitations that hinder their deployment in critical domains such as mental healthcare. This section examines three primary enhancement techniques that address these limitations: prompt engineering, retrieval-augmented generation, and fine-tuning. Figure \ref{fig:rag-overview} illustrates the architectural framework of these enhancement approaches.
+LLMs have demonstrated remarkable capabilities across various natural language processing tasks, yet they face significant limitations that hinder their deployment in critical domains such as mental healthcare. This section examines three primary enhancement techniques that address these limitations: prompt engineering, retrieval-augmented generation, and fine-tuning. 
 
-% INSERT FIGURE 1 FROM GAO ET AL. SURVEY HERE - RAG technology tree
-% \begin{figure}[h]
-% \centering
-% \includegraphics[width=0.9\textwidth]{figures/rag_technology_tree.png}
-% \caption{Overview of RAG technology development and key components. Source: Gao et al. \cite{gao2024retrieval}}
-% \label{fig:rag-overview}
-% \end{figure}
-
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.7\textwidth]{images/rag_vs_finetuning_comparison.png}
+\caption{Comparison of three LLM enhancement approaches based on external knowledge and model adaptation requirements. Source: Gao et al. \cite{gao2024retrieval}}
+\label{fig:llm-enhancement-comparison}
+\end{figure}
 \subsection{Prompt Engineering}
 \label{subsec:prompt-engineering}
 
@@ -36,7 +34,14 @@ Retrieval-Augmented Generation addresses these limitations by integrating extern
 
 The fundamental architecture of RAG consists of three core components. The retrieval module encodes both the user query and documents from the knowledge base into dense vector representations, then computes semantic similarity to identify the most relevant documents \cite{gao2024retrieval}. The generation module, typically a pre-trained LLM such as GPT or LLaMA, processes both the original query and the retrieved context to produce informed responses \cite{wu2024retrieval}. The augmentation component integrates these elements, determining how retrieved information is presented to the generator and how the final output is constructed \cite{gao2024retrieval}.
 
-The evolution of RAG can be categorized into three developmental paradigms, each representing progressive enhancements over its predecessors \cite{gao2024retrieval}. Naive RAG follows a straightforward pipeline of indexing, retrieval, and generation, where documents are chunked and embedded, relevant chunks are retrieved based on query similarity, and the LLM generates responses using the retrieved context. While simple to implement, this approach suffers from potential retrieval of irrelevant or redundant information and lacks mechanisms to handle complex queries that require multi-step reasoning.
+The evolution of RAG can be categorized into three developmental paradigms, each representing progressive enhancements over its predecessors \cite{gao2024retrieval}. Naive RAG follows a straightforward pipeline of indexing, retrieval, and generation, where documents are chunked and embedded, relevant chunks are retrieved based on query similarity, and the LLM generates responses using the retrieved context. 
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=0.95\textwidth]{images/rag_three_paradigms.png}
+\caption{Evolution of RAG paradigms: Naive, Advanced, and Modular RAG. Source: Gao et al. \cite{gao2024retrieval}}
+\label{fig:rag-paradigms}
+\end{figure}
+While simple to implement, this approach suffers from potential retrieval of irrelevant or redundant information and lacks mechanisms to handle complex queries that require multi-step reasoning.
 
 Advanced RAG addresses these limitations through pre-retrieval and post-retrieval optimizations \cite{gao2024retrieval}. Pre-retrieval techniques improve query quality through expansion methods that enrich sparse queries with additional context, or through decomposition strategies that break complex queries into manageable sub-queries. Post-retrieval enhancements include reranking retrieved documents to prioritize the most relevant information, and context compression techniques that reduce noise while preserving essential content \cite{wu2024retrieval}.
 
@@ -90,4 +95,3 @@ Complementing reasoning enhancement, SAGE introduces State-Action Chain augmenta
 
 SouLLMate demonstrates comprehensive integration of these technical approaches in a practical mental health support system \cite{guo2024soullmate}. The system combines LLMs, LangChain, RAG, and prompt engineering to provide functionalities including preliminary mental health assessment, suicide risk detection, and proactive guidance dialogue. SouLLMate employs RAG for personalized profile uploads and conversational information extraction, collecting key linguistic indicators to enhance various support functions. The system introduces Key Indicator Summarization for context-sensitive response adjustment and Proactive Questioning Strategy for semantic coherence evaluation. This integrated approach illustrates how multiple technical components can be orchestrated to create functional mental health support tools, providing a reference architecture for AI-CARES operator assistance systems that balance automation with human oversight.
 es in role-playing scenarios and enabling operator feedback to refine model behavior through human-in-the-loop training.
-
